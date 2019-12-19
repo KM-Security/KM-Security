@@ -1,0 +1,13 @@
+FROM golang:1-alpine
+
+RUN apk add --no-cache git \
+  && go get -d -v github.com/Kmengsecurity/KM-Security
+ \
+  && go install github.com/Kmengsecurity/KM-Security
+ \
+  && rm -rf ~/go/src/github.com/Kmengsecurity/KM-Security \
+  && apk del git
+
+ENTRYPOINT ["KM-Security"]
+
+CMD ["--help"]
